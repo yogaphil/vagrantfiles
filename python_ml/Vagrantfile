@@ -1,6 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# Copyright (C) 2018  Phillip M. West
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -98,7 +100,7 @@ Vagrant.configure("2") do |config|
       echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | \
       tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
       apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C2518248EEA14886 && \
-      apt-get update || echo "!!!!! Failed to setup Java repo"
+      apt-get update || echo "!!!!! Skipped or did not complete configuration of the Java repository"
 
     # preselect license for Oracle JDK
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | \
@@ -112,7 +114,7 @@ Vagrant.configure("2") do |config|
       curl "https://bazel.build/bazel-release.pub.gpg" -o /vagrant/bazel-release.pub.gpg
     [ -f /vagrant/bazel-release.pub.gpg ] && \
       apt-key add /vagrant/bazel-release.pub.gpg && apt-get update || \
-      echo "!!!!! Failed to setup signing key for Bazel repo"
+      echo "!!!!! Skipped or did not complete the configuration of the Bazel repository"
 
     # install JDK8 and bazel
     apt-get install -y oracle-java8-installer
@@ -130,6 +132,9 @@ Vagrant.configure("2") do |config|
 
     sudo -H -u vagrant python3 -m venv --system-site-packages /home/vagrant/tf
 
-    python3 /vagrant/tf_test.py
+    echo "To verify tensorflow is installed and working properly, run:"
+    echo "python3 /vagrant/tf_test.py"
+    # uncomment to run the test automatically
+    # python3 /vagrant/tf_test.py
   SHELL
 end
