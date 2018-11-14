@@ -127,8 +127,9 @@ Vagrant.configure("2") do |config|
       && sudo -H -u vagrant bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package \
       && sudo -H -u vagrant TMPDIR=/vagrant/tmp ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /vagrant/tensorflow_pkg
 
-    echo "Installing tensorflow..."
-    pip3 install /vagrant/tensorflow_pkg/tensorflow-1.10.1-cp35-cp35m-linux_x86_64.whl
+    [ -f /vagrant/tensorflow_pkg/tensorflow-1.10.1-cp35-cp35m-linux_x86_64.whl ] \
+      && echo "Installing tensorflow..." \
+      && sudo -H pip3 install /vagrant/tensorflow_pkg/tensorflow-1.10.1-cp35-cp35m-linux_x86_64.whl
 
     sudo -H -u vagrant python3 -m venv --system-site-packages /home/vagrant/tf
 
