@@ -1,1 +1,4 @@
 bazel-release.pub.gpg
+.vagrant
+tmp
+tensorflow_pkg

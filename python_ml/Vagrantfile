@@ -120,6 +120,9 @@ Vagrant.configure("2") do |config|
     apt-get install -y oracle-java8-installer
     apt-get install -y bazel
 
+    # make tmp dir for building tensorflow package below
+    mkdir -p /vagrant/tmp
+
     [ ! -d /usr/local/src/tensorflow ] && cd /usr/local/src && git clone https://github.com/tensorflow/tensorflow.git
     cd /usr/local/src/tensorflow && git checkout r1.10
     chown -R vagrant /usr/local/src/tensorflow
