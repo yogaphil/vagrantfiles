@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "debian/stretch64"
+  #config.vm.box = "ubuntu/xenial64" 
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -60,7 +60,15 @@ Vagrant.configure("2") do |config|
   # end
 
   config.vm.provider "lxc" do |lxc|
+    config.vm.box = "debian/stretch64" 
     lxc.customize 'cgroup.memory.limit_in_bytes', '8192M'
+  end
+
+  config.vm.provider "parallels" do |prl|
+          config.vm.box = "parallels/ubuntu-16.04"
+          prl.name = "python_ml"
+          prl.memory = 8192
+          prl.cpus = 6
   end
 
   #
@@ -75,8 +83,8 @@ Vagrant.configure("2") do |config|
     apt-get update
 
     # ubuntu (under Parallels) needs to preselect the boot drive
-    # echo ">>> Preselecting grub-pc settings..."
-    # debconf-set-selections /vagrant/grub-pc.conf
+    echo ">>> Preselecting grub-pc settings..."
+    debconf-set-selections /vagrant/grub-pc.conf
 
     echo ">>> Upgrading packages..."
     apt-get -y upgrade

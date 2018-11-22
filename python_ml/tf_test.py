@@ -23,4 +23,8 @@ def main():
 
 
 if __name__ == '__main__':
+    from timeit import default_timer as timer
+    start = timer()
     main()
+    end = timer()
+    print("Elapsed time: {}".format(end-start))
