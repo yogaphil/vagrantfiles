@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  #config.vm.box = "ubuntu/xenial64" 
+  config.vm.box = "ubuntu/xenial64" 
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -59,16 +59,16 @@ Vagrant.configure("2") do |config|
   #   vb.memory = "1024"
   # end
 
-  config.vm.provider "lxc" do |lxc|
-    config.vm.box = "debian/stretch64" 
+  config.vm.provider "lxc" do |lxc, override|
+    override.vm.box = "debian/stretch64" 
     lxc.customize 'cgroup.memory.limit_in_bytes', '8192M'
   end
 
-  config.vm.provider "parallels" do |prl|
-          config.vm.box = "parallels/ubuntu-16.04"
-          prl.name = "python_ml"
-          prl.memory = 8192
-          prl.cpus = 6
+  config.vm.provider "parallels" do |prl, override|
+    override.vm.box = "parallels/ubuntu-16.04"
+    prl.name = "python_ml"
+    prl.memory = 8192
+    prl.cpus = 6
   end
 
   #
